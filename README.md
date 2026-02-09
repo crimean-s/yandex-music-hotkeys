@@ -1,2 +1,24 @@
 # yandex-music-hotkeys
-Global Yandex Music app hotkeys
+
+Глобальные горячие клавиши для управления приложением Яндекс Музыка в Windows.
+
+## Установка
+
+```bash
+pip install -r requirements.txt
+```
+
+## Запуск
+
+Из корня проекта:
+
+```bash
+python -m src.main
+```
+
+В трее появится иконка. По умолчанию:
+- **Ctrl+→** — следующий трек
+- **Ctrl+←** — предыдущий трек
+- **Ctrl+Пробел** — воспроизведение/пауза
+
+Комбинации настраиваются в `config.json` (ключ `hotkeys`). Меню трея: «Reload Config», «Exit».
