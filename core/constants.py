@@ -1,7 +1,7 @@
 from typing import Dict
 
 APP_NAME = "YandexMusicHotkeys"
-APP_VERSION = "0.7.0"
+APP_VERSION = "0.8.0"
 
 CONFIG_FILENAME = "config.json"
 
