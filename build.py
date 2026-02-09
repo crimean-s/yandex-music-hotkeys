@@ -1,6 +1,7 @@
 import subprocess
 import textwrap
 import os
+import sys
 
 from core.constants import APP_NAME, APP_VERSION
 
@@ -59,7 +60,7 @@ def main():
     version_file = generate_version_file()
 
     cmd = [
-        "pyinstaller",
+        sys.executable, "-m", "PyInstaller",
         "--noconsole",
         "--onefile",
         "--name", APP_NAME,
