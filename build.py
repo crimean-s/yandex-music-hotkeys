@@ -1,45 +1,73 @@
-import os
 import subprocess
-import sys
-from PIL import Image
+import textwrap
 
-def generate_icon():
-    """Generate a temporary icon if none exists, to ensure assets folder is populated."""
-    assets_dir = os.path.join(os.path.dirname(__file__), "assets")
-    os.makedirs(assets_dir, exist_ok=True)
-    icon_path = os.path.join(assets_dir, "icon.ico")
+from core.constants import APP_NAME, APP_VERSION
 
-    if not os.path.exists(icon_path):
-        print("Generating default icon...")
-        size = 256
-        img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-        # Draw a circle
-        from PIL import ImageDraw
-        draw = ImageDraw.Draw(img)
-        draw.ellipse((0, 0, size, size), fill="#FFCC00")
-        # Draw a music note or play symbol (triangle)
-        draw.polygon([(80, 60), (80, 196), (200, 128)], fill="black")
-        img.save(icon_path, format="ICO")
+
+def generate_version_file():
+    parts = [int(x) for x in APP_VERSION.split(".")]
+    while len(parts) < 4:
+        parts.append(0)
+    version_tuple = tuple(parts)
+
+    content = textwrap.dedent(
+        f"""
+            # UTF-8
+            VSVersionInfo(
+              ffi=FixedFileInfo(
+                filevers={version_tuple},
+                prodvers={version_tuple},
+                mask=0x3f,
+                flags=0x0,
+                OS=0x40004,
+                fileType=0x1,
+                subtype=0x0,
+                date=(0, 0)
+              ),
+              kids=[
+                StringFileInfo(
+                  [
+                  StringTable(
+                    u'040904B0',
+                    [StringStruct(u'CompanyName', u'Valiantsin Dzerakh (valentderah)'),
+                    StringStruct(u'FileDescription', u'Yandex Music Global Hotkeys'),
+                    StringStruct(u'FileVersion', u'{APP_VERSION}'),
+                    StringStruct(u'InternalName', u'YandexMusicHotkeys'),
+                    StringStruct(u'LegalCopyright', u'Copyright (c) 2026 Valiantsin Dzerakh'),
+                    StringStruct(u'OriginalFilename', u'YandexMusicHotkeys.exe'),
+                    StringStruct(u'ProductName', u'{APP_NAME}'),
+                    StringStruct(u'ProductVersion', u'{APP_VERSION}')])
+                  ]), 
+                VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
+              ]
+            )
+        """
+    ).strip()
+
+    with open("version_info.txt", "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"Generated version_info.txt with version {APP_VERSION}")
+
 
 def main():
-    # Ensure icon exists
-    generate_icon()
+    generate_version_file()
 
-    # PyInstaller command
     cmd = [
         "pyinstaller",
         "--noconsole",
         "--onefile",
-        "--name", "YandexMusicHotkeys",
+        "--name", APP_NAME,
         "--add-data", "assets;assets",
         "--icon", "assets/icon.ico",
-        "run.py"
+        "--version-file", "version_info.txt",
+        "main.py"
     ]
 
     print(f"Running: {' '.join(cmd)}")
     subprocess.check_call(cmd)
-    
+
     print("\nBuild complete. Check the 'dist' folder.")
+
 
 if __name__ == "__main__":
     main()

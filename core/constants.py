@@ -1,12 +1,8 @@
 from typing import Dict
 
-WM_APPCOMMAND = 0x0319
-
-APPCOMMAND_MEDIA_NEXTTRACK = 11
-APPCOMMAND_MEDIA_PREVIOUSTRACK = 12
-APPCOMMAND_MEDIA_PLAY_PAUSE = 14
-
 APP_NAME = "YandexMusicHotkeys"
+APP_VERSION = "0.7.0"
+
 CONFIG_FILENAME = "config.json"
 
 TARGET_WINDOW_TITLES = ["Yandex Music", "Яндекс Музыка"]
@@ -16,3 +12,9 @@ DEFAULT_HOTKEYS: Dict[str, str] = {
     "previous_track": "ctrl+left",
     "play_pause": "ctrl+space",
 }
+
+WM_APPCOMMAND = 0x0319
+
+APPCOMMAND_MEDIA_NEXTTRACK = 11
+APPCOMMAND_MEDIA_PREVIOUSTRACK = 12
+APPCOMMAND_MEDIA_PLAY_PAUSE = 14
