@@ -17,8 +17,6 @@ class MediaController:
         self.enum_results: List[int] = []
 
     def enum_callback(self, hwnd: int, _lparam: int) -> int:
-        if not self.user32.IsWindowVisible(hwnd):
-            return 1
         length = self.user32.GetWindowTextLengthW(hwnd) + 1
         buf = ctypes.create_unicode_buffer(length)
         self.user32.GetWindowTextW(hwnd, buf, length)
