@@ -21,7 +21,7 @@ class MediaController:
         buf = ctypes.create_unicode_buffer(length)
         self.user32.GetWindowTextW(hwnd, buf, length)
         title = buf.value or ""
-        
+
         if any(target in title for target in TARGET_WINDOW_TITLES):
             self.enum_results.append(hwnd)
         return 1

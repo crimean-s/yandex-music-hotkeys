@@ -3,7 +3,7 @@ import textwrap
 import os
 import sys
 
-from core.constants import APP_NAME, APP_VERSION
+from core.constants import APP_NAME, APP_VERSION, APP_DESCRIPTION, APP_OWNER, OWNER_TAGNAME
 
 
 def generate_version_file() -> str:
@@ -31,11 +31,11 @@ def generate_version_file() -> str:
                   [
                   StringTable(
                     u'040904B0',
-                    [StringStruct(u'CompanyName', u'Valiantsin Dzerakh (valentderah)'),
-                    StringStruct(u'FileDescription', u'Yandex Music Global Hotkeys'),
+                    [StringStruct(u'CompanyName', u'{APP_OWNER} ({OWNER_TAGNAME})'),
+                    StringStruct(u'FileDescription', u'{APP_DESCRIPTION}'),
                     StringStruct(u'FileVersion', u'{APP_VERSION}'),
-                    StringStruct(u'InternalName', u'YandexMusicHotkeys'),
-                    StringStruct(u'LegalCopyright', u'Copyright (c) 2026 Valiantsin Dzerakh'),
+                    StringStruct(u'InternalName', u'{APP_NAME}'),
+                    StringStruct(u'LegalCopyright', u'Copyright (c) 2026 {APP_OWNER}'),
                     StringStruct(u'OriginalFilename', u'YandexMusicHotkeys.exe'),
                     StringStruct(u'ProductName', u'{APP_NAME}'),
                     StringStruct(u'ProductVersion', u'{APP_VERSION}')])

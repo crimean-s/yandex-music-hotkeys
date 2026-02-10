@@ -63,8 +63,6 @@ class SettingsWindow:
             self.root.after(0, self._on_close_window)
         except Exception:
             pass
-        # quit() потокобезопасен — гарантирует выход из mainloop,
-        # даже если after() callback не успел выполниться
         try:
             self.root.quit()
         except Exception:
@@ -111,7 +109,7 @@ class SettingsWindow:
         ctk.CTkLabel(
             self.content_area,
             text="Settings",
-            font=ctk.CTkFont(size=18, weight="bold"),
+            font=ctk.CTkFont(size=24, weight="bold"),
             text_color=SECTION_TITLE_COLOR,
         ).pack(anchor="w", padx=24, pady=(20, 8))
 
@@ -173,8 +171,6 @@ class SettingsWindow:
             self.on_close()
         if not self.is_alive():
             return
-        # quit() первым — надёжно останавливает mainloop,
-        # затем destroy() чистит виджеты
         try:
             self.root.quit()
         except Exception:

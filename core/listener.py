@@ -24,7 +24,7 @@ class HotkeyListener:
         self.stop()
 
         hotkeys_config = self.config.get_hotkeys()
-        
+
         action_map: Dict[str, Callable[[], None]] = {
             "next_track": self.on_next,
             "previous_track": self.on_previous,

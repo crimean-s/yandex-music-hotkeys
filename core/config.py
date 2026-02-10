@@ -19,7 +19,7 @@ class Config:
             base_path = os.getenv("LOCALAPPDATA") or os.path.expanduser("~\\AppData\\Local")
         else:
             base_path = os.path.join(os.path.expanduser("~"), ".config")
-        
+
         path = os.path.join(base_path, APP_NAME)
         os.makedirs(path, exist_ok=True)
         return path
@@ -41,7 +41,7 @@ class Config:
         for key in DEFAULT_HOTKEYS:
             if key in hotkeys and hotkeys[key]:
                 merged[key] = str(hotkeys[key]).strip().lower()
-        
+
         return {"hotkeys": merged}
 
     def save_default_config(self) -> None:
