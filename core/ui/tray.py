@@ -6,12 +6,12 @@ import threading
 from PIL import Image
 from typing import Optional, TYPE_CHECKING
 
-from core.listener import HotkeyListener
+from core.tools.listener import HotkeyListener
 from core.config import Config
 from core.constants import APP_NAME, get_resource_path
 
 if TYPE_CHECKING:
-    from core.gui import SettingsWindow
+    from core.ui.settings import SettingsWindow
 
 
 def _enable_dark_menu() -> None:
@@ -56,7 +56,7 @@ class TrayIcon:
 
             self.listener.stop()
 
-            from core.gui import SettingsWindow
+            from core.ui.settings import SettingsWindow
 
             window = SettingsWindow(self.config, self.listener)
             self._settings_window = window

@@ -1,7 +1,7 @@
 import keyboard
 from typing import List, Dict, Callable
 
-from core.controller import MediaController
+from core.tools.controller import MediaController
 from core.config import Config
 
 

@@ -6,7 +6,7 @@ import keyboard
 
 from core.constants import APP_NAME, APP_VERSION, DEFAULT_HOTKEYS, get_resource_path
 from core.config import Config
-from core.listener import HotkeyListener
+from core.tools.listener import HotkeyListener
 
 
 ctk.set_appearance_mode("dark")

@@ -3,7 +3,7 @@ import sys
 from typing import Dict
 
 APP_NAME = "Yandex Music Hotkeys"
-APP_VERSION = "0.9.0"
+APP_VERSION = "0.9.2"
 APP_DESCRIPTION = "Global hotkeys for controlling the Yandex Music desktop application on Windows."
 APP_OWNER = "Valiantsin Dzerakh"
 OWNER_TAGNAME = "valentderah"

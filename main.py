@@ -1,7 +1,7 @@
 from core.config import Config
-from core.controller import MediaController
-from core.listener import HotkeyListener
-from core.tray import TrayIcon
+from core.tools.controller import MediaController
+from core.tools.listener import HotkeyListener
+from core.ui.tray import TrayIcon
 
 
 def main() -> None:
