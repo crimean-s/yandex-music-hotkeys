@@ -62,6 +62,10 @@ def main() -> None:
         "numpy", "matplotlib", "scipy", "pandas", "IPython",
         "unittest", "test", "doctest", "pdb", "pydoc",
         "lib2to3", "xmlrpc", "multiprocessing",
+        "pystray._darwin","pystray._gtk", "pystray._xorg",
+        "pystray._appindicator", "pystray._util.gtk", 
+        "pystray._util.notify_dbus", "keyboard._darwinkeyboard", 
+        "keyboard._nixcommon", "darkdetect._mac_detect",
     ]
 
     cmd = [
