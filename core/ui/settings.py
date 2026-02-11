@@ -12,10 +12,21 @@ from core.tools.listener import HotkeyListener
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
 
-CONTENT_BG = "#191919"
-SECTION_TITLE_COLOR = "#FFFFFF"
+BG_MAIN = "#000000"
+BG_GROUP = "#1C1C1E"
+TITLE_COLOR = "#FFFFFF"
+LABEL_COLOR = "#FFFFFF"
+SECONDARY_COLOR = "#8E8E93"
+BUTTON_BG = "#2C2C2E"
+BUTTON_HOVER = "#3A3A3C"
+
 MIN_WINDOW_WIDTH = 420
-MIN_WINDOW_HEIGHT = 250
+MIN_WINDOW_HEIGHT = 280
+PADDING_H = 24
+PADDING_V = 20
+GROUP_RADIUS = 12
+GROUP_GAP = 24
+ROW_PADDING = 14
 
 HOTKEY_LABELS: Dict[str, str] = {
     "next_track": "Next track",
@@ -71,7 +82,7 @@ class SettingsWindow:
     def _configure_root(self) -> None:
         self.root.title(f"{APP_NAME} — Settings")
         self.root.resizable(False, False)
-        self.root.configure(fg_color=CONTENT_BG)
+        self.root.configure(fg_color=BG_MAIN)
         self.root.protocol("WM_DELETE_WINDOW", self._on_close_window)
         self._set_window_icon()
 
@@ -102,19 +113,33 @@ class SettingsWindow:
         self.root.minsize(width, height)
 
     def _build_content_area(self, parent: ctk.CTkFrame) -> None:
-        self.content_area = ctk.CTkFrame(parent, fg_color=CONTENT_BG, corner_radius=0)
+        self.content_area = ctk.CTkFrame(parent, fg_color=BG_MAIN, corner_radius=0)
         self.content_area.pack(fill="both", expand=True)
 
     def _build_hotkeys_section(self) -> None:
         ctk.CTkLabel(
             self.content_area,
             text="Settings",
-            font=ctk.CTkFont(size=24, weight="bold"),
-            text_color=SECTION_TITLE_COLOR,
-        ).pack(anchor="w", padx=24, pady=(20, 8))
+            font=ctk.CTkFont(family="Segoe UI Black", size=34),
+            text_color=TITLE_COLOR,
+        ).pack(anchor="w", padx=PADDING_H, pady=(PADDING_V + 8, 4))
 
-        self.hotkeys_content = ctk.CTkFrame(self.content_area, fg_color="transparent")
-        self.hotkeys_content.pack(fill="x")
+        ctk.CTkLabel(
+            self.content_area,
+            text="HOTKEYS",
+            font=ctk.CTkFont(size=13),
+            text_color=SECONDARY_COLOR,
+        ).pack(anchor="w", padx=PADDING_H, pady=(8, 6))
+
+        hotkeys_group = ctk.CTkFrame(
+            self.content_area,
+            fg_color=BG_GROUP,
+            corner_radius=GROUP_RADIUS,
+        )
+        hotkeys_group.pack(fill="x", padx=PADDING_H, pady=(0, GROUP_GAP))
+
+        self.hotkeys_content = ctk.CTkFrame(hotkeys_group, fg_color="transparent")
+        self.hotkeys_content.pack(fill="x", padx=16, pady=4)
         hotkeys = self.config.get_hotkeys()
         for row, (key, combo) in enumerate(DEFAULT_HOTKEYS.items()):
             self.hotkey_values[key] = hotkeys.get(key, combo)
@@ -126,35 +151,50 @@ class SettingsWindow:
         ctk.CTkLabel(
             self.hotkeys_content,
             text=HOTKEY_LABELS.get(key, key),
-            font=ctk.CTkFont(size=14),
-            text_color="#ffffff",
-        ).grid(row=row, column=0, sticky="w", padx=(24, 24), pady=10)
+            font=ctk.CTkFont(size=17),
+            text_color=LABEL_COLOR,
+        ).grid(row=row, column=0, sticky="w", padx=(0, 16), pady=ROW_PADDING)
 
         button = ctk.CTkButton(
             self.hotkeys_content,
             text=self._format_combo_display(self.hotkey_values[key]),
-            width=140,
-            height=28,
-            font=ctk.CTkFont(size=13),
-            fg_color="#282828",
-            hover_color="#3d3d3d",
-            text_color="#ffffff",
-            corner_radius=6,
+            width=130,
+            height=32,
+            font=ctk.CTkFont(size=17),
+            fg_color=BUTTON_BG,
+            hover_color=BUTTON_HOVER,
+            text_color=LABEL_COLOR,
+            corner_radius=8,
             command=lambda k=key: self._start_record(k),
         )
-        button.grid(row=row, column=1, sticky="e", padx=(0, 24), pady=10)
+        button.grid(row=row, column=1, sticky="e", padx=(0, 0), pady=ROW_PADDING)
         self.hotkey_buttons[key] = button
 
     def _build_version_section(self) -> None:
-        ctk.CTkFrame(self.content_area, fg_color="#2A2A2A", height=1).pack(
-            fill="x", padx=24, pady=(12, 12)
-        )
-        ctk.CTkLabel(
+        version_group = ctk.CTkFrame(
             self.content_area,
-            text=f"Version {APP_VERSION}",
-            font=ctk.CTkFont(size=14),
-            text_color="gray",
-        ).pack(anchor="w", pady=(0, 12), padx=24)
+            fg_color=BG_GROUP,
+            corner_radius=GROUP_RADIUS,
+        )
+        version_group.pack(fill="x", padx=PADDING_H, pady=(0, PADDING_V + 12))
+
+        version_inner = ctk.CTkFrame(version_group, fg_color="transparent")
+        version_inner.pack(fill="x", padx=16, pady=ROW_PADDING)
+        version_inner.grid_columnconfigure(1, weight=1)
+
+        ctk.CTkLabel(
+            version_inner,
+            text="Version",
+            font=ctk.CTkFont(size=17),
+            text_color=LABEL_COLOR,
+        ).grid(row=0, column=0, sticky="w")
+
+        ctk.CTkLabel(
+            version_inner,
+            text=APP_VERSION,
+            font=ctk.CTkFont(size=17),
+            text_color=SECONDARY_COLOR,
+        ).grid(row=0, column=1, sticky="e")
 
     def _clear_recording(self) -> None:
         if self._record_hook is not None:
