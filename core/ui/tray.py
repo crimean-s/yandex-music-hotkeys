@@ -52,7 +52,6 @@ class TrayIcon:
         _enable_dark_tray_menu()
         menu = pystray.Menu(
             pystray.MenuItem(t("menu.settings"), self._on_settings_click, default=True),
-            pystray.MenuItem(t("menu.reload_config"), self._on_reload_click),
             pystray.MenuItem(t("menu.exit"), self._on_exit_click),
         )
         self._icon = pystray.Icon(
@@ -75,12 +74,6 @@ class TrayIcon:
             return
         threading.Thread(target=self._run_settings_ui, daemon=True).start()
 
-    def _on_reload_click(
-        self,
-        _icon: pystray.Icon,
-        _item: pystray.MenuItem,
-    ) -> None:
-        self._listener.reload()
 
     def _on_exit_click(
         self,

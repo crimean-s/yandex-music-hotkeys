@@ -140,7 +140,7 @@ class SettingsWindow:
         self._apply_geometry()
 
     def _configure_root(self) -> None:
-        self._root.title(f"{APP_NAME} — {t('window.settings_title')}")
+        self._root.title(APP_NAME)
         self._root.resizable(False, False)
         self._root.configure(fg_color=Theme.BG_MAIN)
         self._set_window_icon()
@@ -275,7 +275,7 @@ class SettingsWindow:
         self._build_language_block(content)
         self._build_version_block(content)
         self._apply_geometry()
-        self._root.title(f"{APP_NAME} — {t('window.settings_title')}")
+        self._root.title(APP_NAME)
 
     def _build_version_block(self, parent: ctk.CTkFrame) -> None:
         group = ctk.CTkFrame(

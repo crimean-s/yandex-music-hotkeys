@@ -8,7 +8,6 @@ DEFAULT_LOCALE = "en"
 _TRANSLATIONS: Dict[str, Dict[str, str]] = {
     "en": {
         "menu.settings": "Settings",
-        "menu.reload_config": "Reload Config",
         "menu.exit": "Exit",
         "window.settings_title": "Settings",
         "settings.title": "Settings",
@@ -24,7 +23,6 @@ _TRANSLATIONS: Dict[str, Dict[str, str]] = {
     },
     "ru": {
         "menu.settings": "Настройки",
-        "menu.reload_config": "Перезагрузить конфиг",
         "menu.exit": "Выход",
         "window.settings_title": "Настройки",
         "settings.title": "Настройки",
