@@ -2,6 +2,8 @@ English | [Русский](README.ru.md)
 
 # Yandex Music Hotkeys
 
+<img src="assets/banner.png">
+
 Global hotkeys for controlling the Yandex Music desktop application on Windows.
 
 The application runs in the background and allows you to control playback even if the Yandex Music window is minimized
