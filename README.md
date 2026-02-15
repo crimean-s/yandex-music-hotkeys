@@ -25,6 +25,9 @@ the [releases](https://github.com/valentderah/yandex-music-hotkeys/releases) sec
 
 ### Option 2: Run from source or build
 
+<details>
+<summary>More details</summary>
+
 1. Clone the repository.
 2. Install dependencies:
    ```bash
@@ -37,7 +40,9 @@ the [releases](https://github.com/valentderah/yandex-music-hotkeys/releases) sec
 
 OR
 
-3. Build your own .exe:
+3. Build your own .exe file:
    ```bash
    python build.py
    ```
+
+</details>
